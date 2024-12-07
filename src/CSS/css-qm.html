@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="../img/favicon.ico" type="image/x-icon">
+  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
+  <link rel="stylesheet" href="../output.css">
+  <title>Quiz App - CSS(medium)</title>
+</head>
+
+<body class="bg-[#f7f7f7] overflow-x-hidden">
+  <header>
+    <nav class="md:px-10 pl-7 shadow-md bg-[#f5f5f5]">
+
+      <div id="container2" class="flex items-center justify-between ">
+        <img class="md:h-14 h-10" src="../img/Quiz App.png" alt="logo">
+
+        <div class="flex justify-center items-center">
+          <div x-data="{ open: false }" class="dark:bg-gray-800 w-64 flex justify-center items-center mr-[-20px]">
+            <div @click="open = !open" class="relative border-b-4 border-transparent py-3"
+              :class="{'border-indigo-700 transform transition duration-300 ': open}"
+              x-transition:enter-end="transform opacity-100 scale-100"
+              x-transition:leave="transition ease-in duration-75"
+              x-transition:leave-start="transform opacity-100 scale-100">
+              <div class="flex justify-center items-center space-x-3 cursor-pointer">
+                <div class="font-semibold dark:text-white text-gray-900 text-lg">
+                  <div id="homename" class="cursor-pointer md:text-base "></div>
+                </div>
+                <div
+                  class="w-9 md:w-12 h-9 md:h-12 rounded-full overflow-hidden border-2 dark:border-white border-gray-900">
+                  <img src="../img/user.png" alt="" class="w-full h-full object-cover">
+                </div>
+              </div>
+              <div x-show="open" x-transition:enter="transition ease-out duration-100"
+                x-transition:enter-start="transform opacity-0 scale-95"
+                x-transition:enter-end="transform opacity-100 scale-100"
+                x-transition:leave="transition ease-in duration-75"
+                x-transition:leave-start="transform opacity-100 scale-100"
+                x-transition:leave-end="transform opacity-0 scale-95"
+                class="absolute w-40 md:w-48 px-5 py-3 dark:bg-gray-800 bg-white rounded-lg shadow border dark:border-transparent mt-5">
+                <ul class="space-y-3 dark:text-white">
+                  <li class="font-medium">
+                    <a href="index.html"
+                      class="flex items-center transform transition-colors duration-200 border-r-4 border-transparent hover:border-red-600">
+                      <div class="mr-3 text-red-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1">
+                          </path>
+                        </svg>
+                      </div>
+                      Logout
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="flex flex-col items-center justify-center h-[70vh] gap-8 px-10">
+      <div class="flex items-end font-bold gap-3">
+        <h1 class="text-[#2899F3] font-bold md:text-4xl text-xl">CSS Quiz</h1>
+        <div class="text-green-500"><span id="quiz-num"></span></div>
+      </div>
+      <div>
+        <div class="md:text-2xl text-xl font-medium">
+          <span class="text-indigo-600 text-base font-semibold">Question&rpar; </span>
+          <span id="question-text">Loading...</span>
+        </div>
+        <div class="flex flex-col gap-8 mt-10 w-full" id="options-container">
+          <!-- Options will be dynamically added here -->
+        </div>
+      </div>
+    </section>
+
+    <section class="flex px-10">
+      <div class="flex justify-between w-full ">
+        <a id="prev-btn" href="#"
+          class="flex items-center justify-center px-4 h-10 me-3 text-base font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+          <svg class="w-3.5 h-3.5 me-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+            viewBox="0 0 14 10">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M13 5H1m0 0 4 4M1 5l4-4" />
+          </svg>
+          Previous
+        </a>
+        <a id="next-btn" href="#"
+          class="flex items-center justify-center px-4 h-10 me-3 text-base font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+          <svg class="w-3.5 h-3.5 me-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+            viewBox="0 0 14 10">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M13 5H1m0 0 4 4M1 5l4-4" />
+          </svg>
+          Previous
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <section id="result" class="hidden mt-16">
+    <div class=" flex flex-col items-center justify-center">
+      <div class="mb-8">
+        <h1 class="md:text-3xl text-xl font-bold text-cyan-700">Hey <span class="text-green-600"
+            id="resultUname"></span> 👋🏽</h1>
+      </div>
+      <div class="font-medium text-indigo-800 md:text-xl text-lg mb-4">You Have got <span class="text-black"
+          id="uResult"></span> Out of <span class="text-black" id="quLen"></span>!</div>
+      <button id="okayBtn" type="button"
+        class="text-blue-700 border border-blue-700 hover:bg-blue-700 hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500">
+        <svg class="md:w-14 w-9 md:h-14 h-9" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+          viewBox="0 0 18 18">
+          <path
+            d="M3 7H1a1 1 0 0 0-1 1v8a2 2 0 0 0 4 0V8a1 1 0 0 0-1-1Zm12.954 0H12l1.558-4.5a1.778 1.778 0 0 0-3.331-1.06A24.859 24.859 0 0 1 6 6.8v9.586h.114C8.223 16.969 11.015 18 13.6 18c1.4 0 1.592-.526 1.88-1.317l2.354-7A2 2 0 0 0 15.954 7Z" />
+        </svg>
+        <span class="sr-only">Icon description</span>
+      </button>
+    </div>
+  </section>
+
+
+
+  <script>
+    let cssMediumQuiz = [
+  {
+    questionNum: 1,
+    question: 'Which CSS property is used to control the spacing between lines of text?',
+    options: ['line-height', 'spacing', 'text-spacing', 'line-spacing'],
+    correctOpt: 0
+  },
+  {
+    questionNum: 2,
+    question: 'How do you make each word in a text start with a capital letter?',
+    options: ['text-transform: capitalize', 'text-decoration: capitalize', 'text-style: uppercase', 'font-variant: capitalize'],
+    correctOpt: 0
+  },
+  {
+    questionNum: 3,
+    question: 'Which property is used to control the order of flex items in a container?',
+    options: ['order', 'z-index', 'flex-order', 'item-order'],
+    correctOpt: 0
+  },
+  {
+    questionNum: 4,
+    question: 'Which CSS property is used to create space between the element’s border and its content?',
+    options: ['padding', 'margin', 'border-spacing', 'spacing'],
+    correctOpt: 0
+  },
+  {
+    questionNum: 5,
+    question: 'How do you select all elements with the attribute `data-toggle` in CSS?',
+    options: ['[data-toggle]', '.data-toggle', '#data-toggle', '*data-toggle'],
+    correctOpt: 0
+  }
+];
+
+
+    let currentQuestion = 0;
+
+    let userAnswers = [];
+
+    // DOM Elements
+    const questionElement = document.getElementById('question-text');
+    const optionsContainer = document.getElementById('options-container');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const quizNum = document.getElementById('quiz-num');
+
+    // Load Question and Options
+    function loadQuestion() {
+      const quiz = cssMediumQuiz[currentQuestion];
+      questionElement.textContent = quiz.question;
+      optionsContainer.innerHTML = "";
+      quiz.options.forEach((option, index) => {
+        const optionLabel = document.createElement('label');
+        optionLabel.classList.add('flex', 'bg-gray-200', 'text-gray-700', 'rounded-md', 'px-4', 'py-2', 'cursor-pointer', 'items-center', 'space-x-2');
+
+        const radioInput = document.createElement('input');
+        radioInput.type = 'radio';
+        radioInput.name = 'option';
+        optionLabel.appendChild(radioInput);
+        document.body.appendChild(optionLabel);
+
+        radioInput.value = index;
+        radioInput.onclick = () => selectOption(index);
+
+        const optionText = document.createElement('i');
+        optionText.textContent = option;
+
+        optionLabel.appendChild(radioInput);
+        optionLabel.appendChild(optionText);
+        optionsContainer.appendChild(optionLabel);
+      });
+
+      quizNum.textContent = `0${currentQuestion + 1}/05`;
+      let tt = "Next" + `<svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10"> <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/></svg>`;
+      nextBtn.innerHTML = (currentQuestion === cssMediumQuiz.length - 1) ? "Submit" : tt;
+
+      prevBtn.disabled = currentQuestion === 0;
+    }
+
+    function selectOption(index) {
+      userAnswers[currentQuestion] = index;
+    }
+
+    nextBtn.addEventListener('click', () => {
+      if (currentQuestion < cssMediumQuiz.length - 1) {
+        currentQuestion++;
+        loadQuestion();
+      } else {
+        calculateResults();
+      }
+    });
+
+    prevBtn.addEventListener('click', () => {
+      if (currentQuestion > 0) {
+        currentQuestion--;
+        loadQuestion();
+      }
+    });
+
+    function calculateResults() {
+      let correctAnswers = 0;
+      cssMediumQuiz.forEach((quiz, index) => {
+        if (userAnswers[index] === quiz.correctOpt) {
+          correctAnswers++;
+        }
+      });
+
+      document.getElementById("uResult").innerHTML = correctAnswers;
+      document.getElementById("quLen").innerHTML = cssMediumQuiz.length;
+      document.getElementById("okayBtn").addEventListener("click", () => {
+        window.location.reload(true);
+      })
+      document.getElementsByTagName("main")[0].style.display = "none";
+      document.getElementById("result").classList.remove("hidden");
+    }
+
+    loadQuestion();
+
+  </script>
+
+
+  <script src="../script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
+  <link rel="stylesheet" href="output.css">
+  <title>Quiz App</title>
+</head>
+
+<body class="bg-[#f7f7f7] overflow-x-hidden">
+  <header>
+    <nav class="md:px-10 pl-7 shadow-md bg-[#f5f5f5]">
+
+      <div id="container2" class="flex items-center justify-between ">
+        <img class="md:h-14 h-10" src="img/Quiz App.png" alt="logo">
+
+        <div class="flex justify-center items-center">
+          <div x-data="{ open: false }" class="dark:bg-gray-800 w-64 flex justify-center items-center mr-[-20px]">
+            <div @click="open = !open" class="relative border-b-4 border-transparent py-3"
+              :class="{'border-indigo-700 transform transition duration-300 ': open}"
+              x-transition:enter-end="transform opacity-100 scale-100"
+              x-transition:leave="transition ease-in duration-75"
+              x-transition:leave-start="transform opacity-100 scale-100">
+              <div class="flex justify-center items-center space-x-3 cursor-pointer">
+                <div class="font-semibold dark:text-white text-gray-900 text-lg">
+                  <div id="homename" class="cursor-pointer md:text-base "></div>
+                </div>
+                <div
+                  class="w-9 md:w-12 h-9 md:h-12 rounded-full overflow-hidden border-2 dark:border-white border-gray-900">
+                  <img src="img/user.png" alt="" class="w-full h-full object-cover">
+                </div>
+              </div>
+              <div x-show="open" x-transition:enter="transition ease-out duration-100"
+                x-transition:enter-start="transform opacity-0 scale-95"
+                x-transition:enter-end="transform opacity-100 scale-100"
+                x-transition:leave="transition ease-in duration-75"
+                x-transition:leave-start="transform opacity-100 scale-100"
+                x-transition:leave-end="transform opacity-0 scale-95"
+                class="absolute w-40 md:w-48 px-5 py-3 dark:bg-gray-800 bg-white rounded-lg shadow border dark:border-transparent mt-5">
+                <ul class="space-y-3 dark:text-white">
+                  <li class="font-medium">
+                    <a href="index.html"
+                      class="flex items-center transform transition-colors duration-200 border-r-4 border-transparent hover:border-red-600">
+                      <div class="mr-3 text-red-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                          xmlns="http://www.w3.org/2000/svg">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1">
+                          </path>
+                        </svg>
+                      </div>
+                      Logout
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section id="container2" class="flex flex-col items-center pt-10 mb-10">
+      <div class="inline-flex rounded-md shadow-sm" role="group">
+
+        <button type="button" id="allBtn" data-category="all"
+          class="cat-btn inline-flex items-center px-2 md:px-4 py-1 md:py-2 text-[12] md:text-sm font-bold text-gray-900 bg-transparent border border-gray-900 rounded-s-lg hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700">
+          <img class="h-6 md:h-7 mr-1" src="img/All.png" alt="html logo">
+          All
+        </button>
+        <button type="button" id="htmlBtn" data-category="html"
+          class="cat-btn inline-flex items-center px-2 md:px-4 py-1 md:py-2 text-[12] md:text-sm font-bold text-gray-900 bg-transparent border-t border-b border-gray-900 hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700">
+          <img class="h-4 mr-2" src="img/html-5.png" alt="CSS logo">
+          HTML
+        </button>
+        <button type="button" id="cssBtn" data-category="css"
+          class="cat-btn inline-flex items-center px-2 md:px-4 py-1 md:py-2 text-[12] md:text-sm font-bold text-gray-900 bg-transparent border-t border-l border-b border-gray-900 hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700">
+          <img class="h-4 mr-2" src="img/css-3.png" alt="CSS logo">
+          CSS
+        </button>
+        <button type="button" id="jsBtn" data-category="js"
+          class="cat-btn inline-flex items-center px-2 md:px-4 py-1 md:py-2 text-[12] md:text-sm font-bold text-gray-900 bg-transparent border border-gray-900 rounded-e-lg hover:bg-gray-900 hover:text-white focus:z-10 focus:ring-2 focus:ring-gray-500 focus:bg-gray-900 focus:text-white dark:border-white dark:text-white dark:hover:text-white dark:hover:bg-gray-700 dark:focus:bg-gray-700">
+          <img class="h-4 mr-2" src="img/js.png" alt="JS logo">
+          JavaScript
+        </button>
+      </div>
+    </section>
+
+    <section id="container2" class="flex flex-wrap gap-6 items-center justify-center h-[80%] mt-10">
+
+      <section id="HTML" class="flex flex-col max-w-7xl w-full items-center">
+        <h1 data-category="html" class="card md:text-3xl text-2xl text-[orange] font-extrabold underline mb-6">HTML</h1>
+        <div class="flex flex-wrap gap-3 md:gap-6 items-center justify-center">
+          <div data-category="html"
+            class="card hover:scale-[1.02] ease-in duration-150 relative flex flex-col md:my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-72  md:w-96">
+            <div class="p-4">
+              <h5 class="mb-2 text-[#0E63D1] text-lg md:text-xl font-extrabold md:font-semibold">
+                HTML Quiz <span class="md:text-sm text-xs font-extrabold md:font-semibold text-green-500">(Easy)</span>
+              </h5>
+              <p class="text-slate-600 leading-normal md:text-[16.5px] text-sm font-normal">
+                Heres the HTML quiz to test your understanding of HTML! This is the easy level of the HTML quiz.
+              </p>
+
+              <a href="./HTML/html-qe.html"><button
+                  class="flex items-center rounded-md bg-[#0E63D1] md:py-2 py-1 md:px-4 px-3 mt-6 border border-transparent text-center text-xs md:text-sm text-white transition-all shadow-md hover:shadow-lg hover:bg-green-500 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                  type="button">
+                  Start Quiz<svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M1 5h12m0 0L9 1m4 4L9 9" />
+                  </svg>
+                </button></a>
+            </div>
+          </div>
+
+          <div data-category="html"
+            class="card hover:scale-[1.02] ease-in duration-150 relative flex flex-col my-3 md:my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-72  md:w-96">
+            <div class="p-4">
+              <h5 class="mb-2 text-[#0E63D1] text-lg md:text-xl font-extrabold md:font-semibold">
+                HTML Quiz <span
+                  class="md:text-sm text-xs font-extrabold md:font-semibold text-orange-500">(Medium)</span>
+              </h5>
+              <p class="text-slate-600 md:text-base text-sm leading-normal font-normal">
+                Heres the HTML quiz to test your understanding of HTML! This is the medium level of the HTML quiz.
+              </p>
+
+              <a href="./HTML/html-qm.html">
+                <button
+                  class="flex items-center rounded-md bg-[#0E63D1] md:py-2 py-1 md:px-4 px-3 mt-6 border border-transparent text-center text-xs md:text-sm text-white transition-all shadow-md hover:shadow-lg hover:bg-orange-500 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                  type="button">
+                  Start Quiz<svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M1 5h12m0 0L9 1m4 4L9 9" />
+                  </svg>
+                </button>
+              </a>
+            </div>
+          </div>
+
+          <div data-category="html"
+            class="card hover:scale-[1.02] ease-in duration-150 relative flex flex-col my-3 md:my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-72  md:w-96">
+            <div class="p-4">
+              <h5 class="mb-2 text-[#0E63D1] text-lg md:text-xl font-extrabold md:font-semibold">
+                HTML Quiz <span class="md:text-sm text-xs font-extrabold md:font-semibold text-red-600">(Hard)</span>
+              </h5>
+              <p class="text-slate-600 md:text-base text-sm leading-normal font-normal">
+                Heres the HTML quiz to test your understanding of HTML! This is the hardest level of the HTML quiz.
+              </p>
+
+              <a href="./HTML/html-qh.html">
+                <button
+                  class="flex items-center rounded-md bg-[#0E63D1] md:py-2 py-1 md:px-4 px-3 mt-6 border border-transparent text-center text-xs md:text-sm text-white transition-all shadow-md hover:shadow-lg hover:bg-red-500 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                  type="button">
+                  Start Quiz<svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M1 5h12m0 0L9 1m4 4L9 9" />
+                  </svg>
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="CSS" class="flex flex-col max-w-7xl w-full items-center">
+        <h1 data-category="css" class="card md:text-3xl text-[25px] text-[#2899F3] font-extrabold underline mb-6">CSS
+        </h1>
+        <div class="flex flex-wrap gap-6 items-center justify-center">
+          <div data-category="css"
+            class="card hover:scale-[1.02] ease-in duration-150 relative flex flex-col md:my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-72  md:w-96">
+            <div class="p-4">
+              <h5 class="mb-2 text-[#0E63D1] text-lg md:text-xl font-extrabold md:font-semibold">
+                CSS Quiz <span class="md:text-sm text-xs font-extrabold md:font-semibold text-green-500">(Easy)</span>
+              </h5>
+              <p class="text-slate-600 md:text-base text-sm leading-normal font-normal ">
+                Heres the CSS quiz to test your understanding of CSS! This is the easy level of the CSS quiz.
+              </p>
+
+              <a href="./CSS/css-qe.html"><button
+                  class="flex items-center rounded-md bg-[#0E63D1] md:py-2 py-1 md:px-4 px-3 mt-6 border border-transparent text-center text-xs md:text-sm text-white transition-all shadow-md hover:shadow-lg hover:bg-green-500 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                  type="button">
+                  Start Quiz<svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M1 5h12m0 0L9 1m4 4L9 9" />
+                  </svg>
+                </button></a>
+            </div>
+          </div>
+
+          <div data-category="css"
+            class="card hover:scale-[1.02] ease-in duration-150 relative flex flex-col md:my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-72  md:w-96">
+            <div class="p-4">
+              <h5 class="mb-2 text-[#0E63D1] text-lg md:text-xl font-extrabold md:font-semibold">
+                CSS Quiz <span
+                  class="md:text-sm text-xs font-extrabold md:font-semibold text-orange-500">(Medium)</span>
+              </h5>
+              <p class="text-slate-600 md:text-base text-sm leading-normal font-normal">
+                Heres the CSS quiz to test your understanding of CSS! This is the medium level of the CSS quiz.
+              </p>
+
+              <a href="./CSS/css-qm.html">
+                <button
+                  class="flex items-center rounded-md bg-[#0E63D1] md:py-2 py-1 md:px-4 px-3 mt-6 border border-transparent text-center text-xs md:text-sm text-white transition-all shadow-md hover:shadow-lg hover:bg-orange-500 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                  type="button">
+                  Start Quiz<svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M1 5h12m0 0L9 1m4 4L9 9" />
+                  </svg>
+                </button>
+              </a>
+            </div>
+          </div>
+
+          <div data-category="css"
+            class="card hover:scale-[1.02] ease-in duration-150 relative flex flex-col md:my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-72  md:w-96">
+            <div class="p-4">
+              <h5 class="mb-2 text-[#0E63D1] text-lg md:text-xl font-extrabold md:font-semibold">
+                CSS Quiz <span class="md:text-sm text-xs font-extrabold md:font-semibold text-red-600">(Hard)</span>
+              </h5>
+              <p class="text-slate-600 md:text-base text-sm leading-normal font-normal">
+                Heres the CSS quiz to test your understanding of CSS! This is the hardest level of the CSS quiz.
+              </p>
+
+              <a href="./CSS/css-qh.html">
+                <button
+                  class="flex items-center rounded-md bg-[#0E63D1] md:py-2 py-1 md:px-4 px-3 mt-6 border border-transparent text-center text-xs md:text-sm text-white transition-all shadow-md hover:shadow-lg hover:bg-red-500 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                  type="button">
+                  Start Quiz<svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M1 5h12m0 0L9 1m4 4L9 9" />
+                  </svg>
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="JavaScript" class="flex flex-col max-w-7xl w-full items-center mb-10">
+        <h1 data-category="js" class="card md:text-3xl text-2xl text-[#fff128] font-extrabold underline mb-6">JavaScript
+        </h1>
+        <div class="flex flex-wrap gap-6 items-center justify-center">
+          <div data-category="js"
+            class="card hover:scale-[1.02] ease-in duration-150 relative flex flex-col md:my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-72  md:w-96">
+            <div class="p-4">
+              <h5 class="mb-2 text-[#0E63D1] text-lg md:text-xl font-extrabold md:font-semibold">
+                JavaScript Quiz <span
+                  class="md:text-sm text-xs font-extrabold md:font-semibold text-green-500">(Easy)</span>
+              </h5>
+              <p class="text-slate-600 md:text-base text-sm leading-normal font-normal ">
+                Heres the JavaScript quiz to test your understanding of JavaScript! This is the easy level of the
+                JavaScript quiz.
+              </p>
+
+              <a href="./JS/js-qe.html"><button
+                  class="hover:scale-[1.02] ease-in duration-150 flex items-center rounded-md bg-[#0E63D1] py-2 px-4 mt-6 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg hover:bg-green-500 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                  type="button">
+                  Start Quiz<svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M1 5h12m0 0L9 1m4 4L9 9" />
+                  </svg>
+                </button></a>
+            </div>
+          </div>
+
+          <div data-category="js"
+            class="card hover:scale-[1.02] ease-in duration-150 relative flex flex-col md:my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-72  md:w-96">
+            <div class="p-4">
+              <h5 class="mb-2 text-[#0E63D1] text-lg md:text-xl font-extrabold md:font-semibold">
+                JavaScript Quiz <span
+                  class="md:text-sm text-xs font-extrabold md:font-semibold text-orange-500">(Medium)</span>
+              </h5>
+              <p class="text-slate-600 md:text-base text-sm leading-normal font-normal">
+                Heres the JavaScript quiz to test your understanding of JavaScript! This is the medium level of the
+                JavaScript quiz.
+              </p>
+
+              <a href="./JS/js-qm.html">
+                <button
+                  class="flex items-center rounded-md bg-[#0E63D1] md:py-2 py-1 md:px-4 px-3 mt-6 border border-transparent text-center text-xs md:text-sm text-white transition-all shadow-md hover:shadow-lg hover:bg-orange-500 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                  type="button">
+                  Start Quiz<svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M1 5h12m0 0L9 1m4 4L9 9" />
+                  </svg>
+                </button>
+              </a>
+            </div>
+          </div>
+
+          <div data-category="js"
+            class="card hover:scale-[1.02] ease-in duration-150 relative flex flex-col md:my-6 bg-white shadow-sm border border-slate-200 rounded-lg w-72  md:w-96">
+            <div class="p-4">
+              <h5 class="mb-2 text-[#0E63D1] text-lg md:text-xl font-extrabold md:font-semibold">
+                JavaScript Quiz <span
+                  class="md:text-sm text-xs font-extrabold md:font-semibold text-red-600">(Hard)</span>
+              </h5>
+              <p class="text-slate-600 md:text-base text-sm leading-normal font-normal">
+                Heres the JavaScript quiz to test your understanding of JavaScript! This is the hardest level of the
+                JavaScript quiz.
+              </p>
+
+              <a href="./JS/js-qh.html">
+                <button
+                  class="flex items-center rounded-md bg-[#0E63D1] md:py-2 py-1 md:px-4 px-3 mt-6 border border-transparent text-center text-xs md:text-sm text-white transition-all shadow-md hover:shadow-lg hover:bg-red-500 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                  type="button">
+                  Start Quiz<svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M1 5h12m0 0L9 1m4 4L9 9" />
+                  </svg>
+                </button>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+  </main>
+
+  <script>
+    let htmlBtn = document.getElementById('htmlBtn')
+    let cssBtn = document.getElementById('cssBtn')
+    let jsBtn = document.getElementById('jsBtn')
+    let allBtn = document.getElementById('allBtn')
+
+    let catHtml = document.getElementById('HTML')
+    let catCss = document.getElementById('CSS')
+    let catJS = document.getElementById('JavaScript')
+
+    allBtn.addEventListener('click', () => {
+      catHtml.style.display = 'flex'
+      catCss.style.display = 'flex'
+      catJS.style.display = 'flex'
+    })
+
+    htmlBtn.addEventListener('click', () => {
+      catHtml.style.display = 'flex'
+      catCss.style.display = 'none'
+      catJS.style.display = 'none'
+    })
+
+    cssBtn.addEventListener('click', () => {
+      catCss.style.display = 'flex'
+      catHtml.style.display = 'none'
+      catJS.style.display = 'none'
+    })
+
+    jsBtn.addEventListener('click', () => {
+      catJS.style.display = 'flex'
+      catCss.style.display = 'none'
+      catHtml.style.display = 'none'
+    })
+  </script>
+
+
+  <script src="script.js"></script>
+</body>
+
+</html>
