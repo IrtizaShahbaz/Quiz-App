@@ -12,8 +12,7 @@ This project is a Quiz Web Application built using **TailwindCSS** and **JavaScr
   - After completing the quiz, the **Next** button transforms into a **Submit** button, which, when clicked, shows the user's **name** and **score** in a clean, user-friendly interface.
 
 ## How to Run:
-1. Clone this repository.
-2. Open `index.html` in your browser to run the app locally.
+Just go to this URL: https://quizapp-irtiza.netlify.app/
 
 ## Technologies Used:
 - **TailwindCSS** for responsive design and styling.
@@ -21,9 +20,3 @@ This project is a Quiz Web Application built using **TailwindCSS** and **JavaScr
 - **localStorage** for saving user login and quiz data.
 
 Enjoy the quiz!
-
----
-
-### Note:
-To display the preview image, replace the `path/to/your/preview-image.png` with the actual file path of your preview image in the repository.
-
